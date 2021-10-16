@@ -99,7 +99,9 @@ x_train, x_test, y_train, t_test = train_test_split(x,y, test_size = .2, random_
 model = LinearRegression()
 model.fit(x_train, y_train)
 predictions = model.predict(x_test)
+print(x_test)
 
+print(predictions)
 xs = np.arange(len(model.loss))
 ys = model.loss
 
@@ -128,3 +130,19 @@ plt.show()
 # plt.ylabel('Loss', size=14)
 # plt.legend()
 # plt.show()
+
+# User predictions:
+num_cols = len(x[0])
+user_input = input("Would you like to provide input for prediction? y/n")
+iter1 = 0
+x1 = list()  # user x
+while user_input == 'y' and iter1 < num_cols:
+    user_x = input("Attribute %d : " % iter1)
+    if not(user_x == '' or user_x == " " or user_x == "\n"):
+        x1.append(float(user_x))
+        iter1 += 1
+if (user_input == 'y'):
+    x1 = x1 / xnorm
+    user_prediction = model.predict(x1)
+    print(x1)
+    print("Prediction : ", user_prediction)
